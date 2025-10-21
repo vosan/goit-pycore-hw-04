@@ -4,7 +4,8 @@ def parse_input(user_input):
 
 
 def add_contact(args, contacts):
-    assert len(args) == 2, "Invalid arguments count. Contact's name and phone are expected"
+    if len(args) != 2:
+        raise ValueError("Invalid arguments count. Contact's name and phone are expected")
 
     name, phone = args
     contacts[name] = phone
@@ -12,7 +13,8 @@ def add_contact(args, contacts):
 
 
 def change_contact(args, contacts):
-    assert len(args) == 2, "Invalid arguments count. Contact's name and phone number are expected"
+    if len(args) != 2:
+        raise ValueError("Invalid arguments count. Contact's name and phone number are expected")
 
     name, _ = args
     if name not in contacts.keys():
@@ -22,7 +24,8 @@ def change_contact(args, contacts):
 
 
 def show_phone(args, contacts):
-    assert len(args) == 1, "Invalid arguments count. Only contact's name is expected"
+    if len(args) != 1:
+        raise ValueError("Invalid arguments count. Only contact's name is expected")
 
     name = args[0]
     return contacts[name] if name in contacts else "Contact not found."
@@ -66,7 +69,7 @@ def main():
                 case _:
                     output(f"Invalid command.")
 
-        except Exception as e:
+        except ValueError as e:
             output(f"An error occurred: {e}. Please try again.")
 
 
